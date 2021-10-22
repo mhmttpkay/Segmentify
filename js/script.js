@@ -28,17 +28,16 @@ function slider() {
     });
 };
 
-function myFunction(p = 'Size Özel') {
+function myFunction(p = 'Size Özel', p2 = '0') {
 
     const xhr = new XMLHttpRequest();
     xhr.open('GET', 'json/product-list.json', true);
     xhr.onload = function() {
         console.log(this.status);
-
+        var sayac = 0;
         if (this.status === 200) {
 
             let product = JSON.parse(this.responseText);
-
 
             let html = "";
 
@@ -56,11 +55,23 @@ function myFunction(p = 'Size Özel') {
                     Categories = userCategories.split(" > ")[1];
                 }
 
-
-                html += `<button class="nav-link" onclick="myFunction('${userCategories}')" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">${Categories}</button>`;
+                html += `<button class="nav-link" onclick="myFunction('${userCategories}','${i}')" data-id="${i}" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">${Categories}</button>`;
 
                 document.querySelector('#nav-tab').innerHTML = html;
+                sayac++;
+
             }
+
+            var s = document.getElementsByClassName("nav-link");
+            var x = document.getElementsByClassName("nav-link")[p2].getAttribute("data-id");
+
+            for (var i = 0; i < sayac; i++) {
+                if (p2 == i) {
+                    s[i].className += " bg-light text-primary rounded p-1 ";
+                }
+            }
+
+
 
             html = "";
             for (let i = 0; i < product.responses[0][0].params.recommendedProducts[p].length; i++) {
@@ -99,9 +110,26 @@ function myFunction(p = 'Size Özel') {
               </div> `;
 
                 document.querySelector('#first-nav').innerHTML = html;
+
             }
             slider();
+
+            function freecargo() {
+
+                let cargo = product.responses[0][0].params;
+
+                for (let i = 0; i < product.responses[0][0].params.recommendedProducts[p].length; i++) {
+
+                    if (cargo.recommendedProducts[p][i].params.shippingFee == "NON-FREE") {
+                        document.querySelector(".product-cargo").style.visibility = 'hidden';
+                    }
+
+                }
+
+            }
+            freecargo();
         }
+
     }
     xhr.send();
 }
