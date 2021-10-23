@@ -55,11 +55,10 @@ function myFunction(p = 'Size Özel', p2 = '0') {
                     Categories = userCategories.split(" > ")[1];
                 }
 
-                html += `<button class="nav-link" onclick="myFunction('${userCategories}','${i}')" data-id="${i}" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">${Categories}</button>`;
+                html += `<button class="nav-link" onclick="myFunction('${userCategories}','${i}')" data-id="${i}" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true"><div></div>${Categories}</button>`;
 
                 document.querySelector('#nav-tab').innerHTML = html;
                 sayac++;
-
             }
 
             var s = document.getElementsByClassName("nav-link");
@@ -67,11 +66,12 @@ function myFunction(p = 'Size Özel', p2 = '0') {
 
             for (var i = 0; i < sayac; i++) {
                 if (p2 == i) {
+
+                    s[i].firstChild.innerHTML += `<div class='nav-border'></div>`;
                     s[i].className += " bg-light text-primary rounded p-1 ";
+
                 }
             }
-
-
 
             html = "";
             for (let i = 0; i < product.responses[0][0].params.recommendedProducts[p].length; i++) {

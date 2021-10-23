@@ -22,6 +22,14 @@ body {
     overflow: scroll;
 }
 
+.nav-border {
+    width: 5px;
+    height: 25px;
+    border-radius: 0px 20px 20px 0px;
+    background-color: #007AFF;
+    margin-right: 5px;
+}
+
 @media screen and (min-width: 460px) {
     .nav {
         overflow: unset;
@@ -119,6 +127,9 @@ body {
     .cargo-ico {
         display: none;
     }
+    .nav-border {
+        visibility: hidden;
+    }
 }
 
 @media screen and (max-width:768px) {
@@ -131,6 +142,9 @@ body {
     }
     .cargo-ico {
         display: none;
+    }
+    .nav-border {
+        visibility: hidden;
     }
 }
 
@@ -218,8 +232,7 @@ body {
     text-align: left;
     font-size: 12px;
     width: 100%;
-    text-overflow: ellipsis;
-    color: rgb(112, 112, 112);
+    color: #707070;
     line-height: 16px;
     font-weight: 500;
     padding-left: 6px;
